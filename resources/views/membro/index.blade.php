@@ -14,6 +14,14 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="col-sm input-group">
+                    <label for="exampleFormControlInput1" class="form-label">Situação: </label>
+                    <select name="situacao_id" class="form-select">
+                        <option value="1" selected>Ativos</option>
+                        <option value="0">Todos</option>                        
+                    </select>
+                </div>
                 <div>
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-success"> Buscar </button>
@@ -28,13 +36,12 @@
             <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
-                    <th scope="col"></th>                    
+                    <th scope="col"></th>
                     <th scope="col">Título</th>
                     <th scope="col">Data</th>
-                    <th scope="col">Pauta</th>
-                    <th scope="col">Ata</th>
-                    <th scope="col">Anexo</th>
-                    <th scope="col">Complemento</th>
+                    <th scope="col">Início</th>
+                    <th scope="col">Fim</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
         <tbody>

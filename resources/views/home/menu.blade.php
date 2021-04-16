@@ -9,7 +9,7 @@
             <a href="/reuniao">Reuniões</a>
         </li>
         <li>
-            <a href="#">Membros</a>
+            <a href="/membro">Membros</a>
         </li>
         <li>
             <a href="/colegiado">Colegiado</a>

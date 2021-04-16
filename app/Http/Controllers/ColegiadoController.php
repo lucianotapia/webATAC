@@ -15,7 +15,7 @@ class ColegiadoController extends Controller
      */
     public function index()
     {        
-        $colegiados = Colegiado::OrderBy('Colegiado')->get();
+        $colegiados = Colegiado::OrderBy('Colegiado')->get();        
         return view('colegiado.index', ['colegiados' => $colegiados]);
     }
 

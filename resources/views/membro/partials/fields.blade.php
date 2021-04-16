@@ -7,10 +7,9 @@
             <button type="submit" onclick="return confirm('Tem certeza?');">Deletar</button>
         </form>
     </td>
-    <td class="text-left">{{ $membro->NroUsp ?? '' }}</td>    
-    <td>{{ $membro->nome ?? '' }}</td>
-    <td>{{ date('d/m/Y H:i:s', strtotime($membro->Inicio)) ?? '' }}</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td class="text-right">{{ $membro->NroUsp ?? '' }}</td>    
+    <td class="text-left">{{ $membro->nome ?? '' }}</td>
+    <td>{{ date('d/m/Y', strtotime($membro->Inicio)) ?? '' }}</td>
+    <td>{{ date('d/m/Y', strtotime($membro->Fim)) ?? '' }}</td>
+    <td>{{ $membro->DescricaoVinculo ?? '' }}</td>    
 </tr>        
