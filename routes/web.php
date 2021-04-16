@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ReuniaoController;
 use App\Http\Controllers\ColegiadoController;
+use App\Http\Controllers\MembroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,7 @@ Route::get('/', function () {
 
 
 Route::get('/reuniao', [ReuniaoController::class, 'index']);
-//Route::resource('/reuniao', ReuniaoController::class);
+
+Route::get('/colegiado', [ColegiadoController::class, 'index']);
+
+Route::get('/membro', [MembroController::class, 'index']);

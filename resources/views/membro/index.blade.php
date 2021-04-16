@@ -1,9 +1,9 @@
 @extends('teste')
 
 @section('dados')
-    @if ($reunioes->count() > 0)
+    @if ($membros->count() > 0)
         <div class="container mt-5">
-        <form method="get" action="/reuniao">
+        <form method="get" action="/membro">
             <div class="row">
                 <div class="col-sm input-group">
                     <label for="exampleFormControlInput1" class="form-label">Colegiado: </label>
@@ -40,17 +40,17 @@
         <tbody>
     @endif
     
-    @forelse($reunioes as $reuniao)
-        @include('reuniao.partials.fields')
+    @forelse($membros as $membro)
+        @include('membro.partials.fields')
     @empty
-        <h3>Não há reuniões cadastradas!</h3>
+        <h3>Não há membros cadastradas!</h3>
     @endforelse
 
-    @if ($reunioes->count() > 0)
+    @if ($membros->count() > 0)
         </tbody>
         </table>
         <div class="text-center">
-            {{ $reunioes->appends(request()->query())->links() }}
+            {{ $membros->appends(request()->query())->links() }}
         </div>
         </div>
     @endif    

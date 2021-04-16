@@ -7,8 +7,9 @@
             <button type="submit" onclick="return confirm('Tem certeza?');">Deletar</button>
         </form>
     </td>
-    <td>{{ $reuniao->Titulo ?? '' }}</td>
-    <td>{{ $reuniao->Data ?? '' }}</td>
+    <td class="text-left">{{ $reuniao->Titulo ?? '' }}</td>    
+    <td>{{ date('d/m/Y H:i:s', strtotime($reuniao->Data)) ?? '' }}</td>
+    
     <td></td>
     <td></td>
     <td></td>

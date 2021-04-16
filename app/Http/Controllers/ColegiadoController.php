@@ -14,11 +14,9 @@ class ColegiadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $colegiados = Reuniao::All();
-        return view('colegiado.index', [
-                    'colegiados' => $colegiados,
-        ]);
+    {        
+        $colegiados = Colegiado::OrderBy('Colegiado')->get();
+        return view('colegiado.index', ['colegiados' => $colegiados]);
     }
 
     /**

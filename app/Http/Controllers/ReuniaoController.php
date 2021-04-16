@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 
 use App\Models\Reuniao;
+use App\Models\Colegiado;
 
 class ReuniaoController extends Controller
 {    
@@ -16,15 +17,19 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {        
-        $sql = "select * from Reuniao order by Data";
-        //$reunioes = DB::select($sql);
-        //$reunioes = DB::table("Reuniao")->get();
-        $reunioes = DB::table("Reuniao")->paginate(10);        
+        //$sql = "select * from Reuniao order by Data";        
 
-        return view('reuniao.index', ['reunioes' => $reunioes]);
-        //return dd($reunioes);
+        if (isset(request()->colegiado_id)) {
+            $reunioes = Reuniao::where('idColegiado', $request->colegiado_id)->OrderBy("Data", "desc")->paginate(15);
+        } else {        
+            $reunioes = Reuniao::OrderBy("Data", "desc")->paginate(15);
+        }
+
+        $colegiados = Colegiado::OrderBy("Colegiado")->get();
+        
+        return view('reuniao.index', ['reunioes' => $reunioes, 'colegiados' => $colegiados]);
     }
 
     /**

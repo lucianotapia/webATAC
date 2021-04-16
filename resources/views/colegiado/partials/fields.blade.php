@@ -1,10 +1,12 @@
-Entrou no Partials
-<li> {{ $colegiado->colegiado ?? '' }}</li>
-<li><a href="/colegiado/{{ $colegiado->CodColegiado }}/edit">Editar</a></li>
-<li>
-    <form action="/colegiado/{{ $colegiado->CodColegiado }}" method="post">
-        @csrf
-        @method('delete')
-        <button type="submit" onclick="return confirm('Tem certeza?');">Apagar</button>
-    </form>
-</li>
+<tr>    
+    <td><a href="/colegiado/{{ $colegiado->CodColegiado }}/edit">Editar</a></td>
+    <td>
+        <form action="/colegiado/{{ $colegiado->CodColegiado }}" method="post">
+            @csrf
+            @method('delete')
+            <button type="submit" onclick="return confirm('Tem certeza?');">Apagar</button>
+        </form>
+    </td>
+
+    <td class="text-left">{{ $colegiado->Colegiado ?? '' }}</td>
+</tr>

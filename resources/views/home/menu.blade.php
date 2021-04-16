@@ -6,13 +6,13 @@
     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cadastro</a>
     <ul class="collapse list-unstyled" id="homeSubmenu">
         <li>
-            <a href="#">Reuniões</a>
+            <a href="/reuniao">Reuniões</a>
         </li>
         <li>
             <a href="#">Membros</a>
         </li>
         <li>
-            <a href="#">Colegiado</a>
+            <a href="/colegiado">Colegiado</a>
         </li>
         </li>
     </ul>
