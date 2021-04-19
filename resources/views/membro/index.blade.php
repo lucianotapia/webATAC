@@ -2,7 +2,9 @@
 
 @section('dados')
     @if ($membros->count() > 0)
-        <div class="container mt-5">
+
+    
+        <div class="container mt-5">        
         <form method="get" action="/membro">
             <div class="row">
                 <div class="col-sm input-group">

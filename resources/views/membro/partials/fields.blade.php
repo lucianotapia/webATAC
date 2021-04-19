@@ -1,3 +1,5 @@
+
+
 <tr>
     <th scope="row"><a href="/membro/{{ $membro->CodMembro }}/edit">Editar</a></th>
     <td>

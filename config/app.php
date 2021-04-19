@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'replica' => env('DB_REPLICA', 'Replica'),
 
     /*
     |--------------------------------------------------------------------------

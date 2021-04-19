@@ -29,7 +29,7 @@ class MembroController extends Controller
 
         if ($where!="") { $where = " where " . $where; }
         $sql = "select *, DescricaoVinculo, ";
-        $sql .= " nome=(select top 1 nompes from pessoa where codpes=NroUsp) from membro ";
+        $sql .= " nome=(select top 1 nompes from " . config("app.replica") . "pessoa where codpes=NroUsp) from membro ";
         $sql .= $join . $where . " order by nome";
 
         $membros = DB::Select($sql);
