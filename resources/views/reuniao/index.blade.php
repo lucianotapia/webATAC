@@ -8,9 +8,18 @@
                 <div class="col-sm input-group">
                     <label for="exampleFormControlInput1" class="form-label">Colegiado: </label>
                     <select name="colegiado_id" class="form-select">
-                        <option value="" selected>Selecione o Colegiado para filtro</option>
-                        @foreach($colegiados as $colegiado)                              
-                            <option value="{{ $colegiado->CodColegiado }}">{{ $colegiado->Colegiado }}</option>                            
+                        @if (request()->colegiado_id=="")
+                            <option value="" selected>Todas as reuniões</option>
+                        @else
+                            <option value="">Todas as reuniões</option>
+                        @endif
+
+                        @foreach($colegiados as $colegiado)
+                            @if (request()->colegiado_id==$colegiado->CodColegiado)                            
+                                <option value="{{ $colegiado->CodColegiado }}" selected>{{ $colegiado->Colegiado }}</option>
+                            @else
+                                <option value="{{ $colegiado->CodColegiado }}">{{ $colegiado->Colegiado }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -21,7 +30,6 @@
                 </div>
             </div>
             <div class="row">&nbsp</div>
-
         </form>
         
         <table class="table table-bordered">

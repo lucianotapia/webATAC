@@ -26,8 +26,11 @@ class ColegiadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('colegiado.create', [
+            'colegiado' => new Colegiado,
+        ]);        
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,9 +38,17 @@ class ColegiadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //public function store(ColegiadoRequest $request)
+    public function store()
     {
-        //
+        //$validated = $request->validated();
+        $colegiado = new Colegiado;
+        $colegiado->colegiado = $request->colegiado;
+        //$colegiado->save($validated);
+        $colegiado->save();
+        request()->session()->flash('alert-info', 'Colegiado cadastrado com sucesso.');
+        
+        return redirect("/colegiado");
     }
 
     /**

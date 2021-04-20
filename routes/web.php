@@ -26,5 +26,7 @@ Route::get('/', function () {
 Route::get('/reuniao', [ReuniaoController::class, 'index']);
 
 Route::get('/colegiado', [ColegiadoController::class, 'index']);
+Route::get('/colegiado/create', [ColegiadoController::class, 'create']);
+Route::post('/colegiado', [ColegiadoController::class, 'store']);
 
 Route::get('/membro', [MembroController::class, 'index']);

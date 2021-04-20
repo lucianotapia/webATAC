@@ -14,6 +14,7 @@ class MembroController extends Controller
     public function index(Request $request)
     {        
         $join = " inner join TipoVinculo on CodTipoVinculo=idTipo ";
+        $join .= " inner join " . config("app.replica") . "pessoa p on codpes=NroUsp ";
 
         if (isset(request()->situacao_id)==false) { request()->situacao_id = 1; }
         
@@ -25,12 +26,16 @@ class MembroController extends Controller
         if (isset(request()->colegiado_id)) {
             if ($where!="") { $where .= " and "; }
             $where .= "idColegiado = " . request()->colegiado_id;
-        }        
+        }
+
+        if (isset(request()->nome)) {
+            if ($where!="") { $where .= " and "; }
+            $where .= "(p.nompes like '%" . request()->nome . "%')";
+        }       
 
         if ($where!="") { $where = " where " . $where; }
-        $sql = "select *, DescricaoVinculo, ";
-        $sql .= " nome=(select top 1 nompes from " . config("app.replica") . "pessoa where codpes=NroUsp) from membro ";
-        $sql .= $join . $where . " order by nome";
+        $sql = "select *, DescricaoVinculo, p.nompes nome from membro ";
+        $sql .= $join . $where . " order by p.nompes";        
 
         $membros = DB::Select($sql);
 
