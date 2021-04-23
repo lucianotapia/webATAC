@@ -24,9 +24,13 @@ Route::get('/', function () {
 
 
 Route::get('/reuniao', [ReuniaoController::class, 'index']);
+Route::get('/reuniao/{Codigo}/edit', [ReuniaoController::class, 'edit']);
 
 Route::get('/colegiado', [ColegiadoController::class, 'index']);
 Route::get('/colegiado/create', [ColegiadoController::class, 'create']);
 Route::post('/colegiado', [ColegiadoController::class, 'store']);
+Route::get('/colegiado/{CodColegiado}/edit', [ColegiadoController::class, 'edit']);
+Route::patch('/colegiado/{CodColegiado}', [ColegiadoController::class, 'update']);
+Route::delete('/colegiado/{CodColegiado}', [ColegiadoController::class, 'destroy']);
 
 Route::get('/membro', [MembroController::class, 'index']);

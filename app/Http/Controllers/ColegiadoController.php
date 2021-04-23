@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Colegiado;
+use App\Http\Requests\ColegiadoRequest;
 
 class ColegiadoController extends Controller
 {
@@ -38,14 +39,12 @@ class ColegiadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //public function store(ColegiadoRequest $request)
-    public function store()
+    public function store(ColegiadoRequest $request)    
     {
-        //$validated = $request->validated();
+        $validated = $request->validated();
         $colegiado = new Colegiado;
         $colegiado->colegiado = $request->colegiado;
-        //$colegiado->save($validated);
-        $colegiado->save();
+        $colegiado->save($validated);        
         request()->session()->flash('alert-info', 'Colegiado cadastrado com sucesso.');
         
         return redirect("/colegiado");
@@ -70,7 +69,9 @@ class ColegiadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('colegiado.edit', [
+            'colegiado' => Colegiado::findOrFail($id)
+       ]);
     }
 
     /**
@@ -80,9 +81,17 @@ class ColegiadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(ColegiadoRequest $request, $id)
+    {        
+        $validated = $request->validated();
+
+        $colegiado = Colegiado::find($id);
+        $colegiado->colegiado = $request->colegiado;
+        $colegiado->update($validated);
+
+        request()->session()->flash('alert-info', 'Colegiado/Comissão atualizado com sucesso.');
+        
+        return redirect("/colegiado");
     }
 
     /**
@@ -93,6 +102,9 @@ class ColegiadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $colegiado = Colegiado::find($id);
+        $colegiado->delete();
+
+        return redirect("/colegiado");
     }
 }

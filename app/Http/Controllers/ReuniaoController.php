@@ -71,8 +71,8 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {        
+        return view('reuniao.edit', [ 'reuniao' => Reuniao::findOrFail($id), 'colegiados' => Colegiado::OrderBy("Colegiado")->get()]);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('teste')
+@extends('home')
 
 @section('dados')
     @if ($reunioes->count() > 0)

@@ -1,4 +1,4 @@
-@extends('teste')
+@extends('home')
 
 @section('dados')
     <div class="container mt-5">
