@@ -23,8 +23,18 @@ class ReuniaoRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [            
+            'data' => 'required|date_format:d/m/Y'            
+        ];
+
+        return $rules;
+    }
+
+    public function messages()
+    {
         return [
-            //
+            'data.required'    => 'A data não pode ficar em branco.',
+            'data.numeric'    => 'O valor deve ser numérico.',
         ];
     }
 }

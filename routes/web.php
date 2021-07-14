@@ -18,10 +18,8 @@ use App\Http\Controllers\MembroController;
 */
 
 Route::get('/', function () {
-    return view('teste');
+    return view('home');
 });
-
-
 
 Route::get('/reuniao', [ReuniaoController::class, 'index']);
 Route::get('/reuniao/{Codigo}/edit', [ReuniaoController::class, 'edit']);

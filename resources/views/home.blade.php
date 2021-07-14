@@ -42,7 +42,7 @@
                             <h3>{{ config('app.name') }}</h3>
                         </div>
                         <div class="col-3 text-right">
-                            <img src="img/ESALQ-USP-preto.png">
+                            <img src="{{ asset('img/ESALQ-USP-preto.png') }}">
                         </div>
                     </div>
 

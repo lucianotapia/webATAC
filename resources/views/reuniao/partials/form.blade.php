@@ -14,7 +14,23 @@
         <div class="row">
             <div class="col">
                 <label for="exampleFormControlInput1" class="form-label">Data</label>
-                <input type="text" name="data" class="data-picker form-control" autocomplete="off"  value="{{ old('data', $reuniao->Data)  }}">
+                <input type="text" name="data" id="data" class="data-picker form-control" autocomplete="off"  value="{{ old('data', $reuniao->Data)  }}">
+            </div>
+            <div class="col">
+                <label for="exampleFormControlInput1" class="form-label">Hora</label>
+                <select name="hora">                    
+                    @foreach(range(7,19) as $hora)
+                        <option value="{{$hora}}">{{ (strlen($hora)==1) ? ("0". $hora):$hora }}</option>
+                    @endforeach
+                </select>:
+                <select name="minuto">                    
+                    @foreach(range(0,59) as $minuto)
+                        <option value="{{ $minuto }}">{{ (strlen($minuto)==1) ? ("0". $minuto):$minuto }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                
             </div>
         </div>
 

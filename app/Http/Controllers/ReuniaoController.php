@@ -97,4 +97,13 @@ class ReuniaoController extends Controller
     {
         //
     }
+
+    public function horas()
+    {
+        $horas = array();
+        for($cont=7; $cont<18; $cont++) {
+            $horas[$cont] = $horas;
+        }
+        return $horas;
+    }
 }

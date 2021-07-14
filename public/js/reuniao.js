@@ -1,5 +1,5 @@
 $( function() {    
     $( "#data" ).datepicker();        
     $( "#data" ).datepicker( "option", "showAnim", "slide" );
-    $( "#data" ).datepicker( "option", "dateFormat", "dd/mm/yy" );    
+    $( "#data" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 });
