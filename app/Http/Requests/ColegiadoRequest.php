@@ -24,7 +24,7 @@ class ColegiadoRequest extends FormRequest
     public function rules()
     {
         $rules = [            
-            'colegiado' => 'required'
+            'colegiado' => 'required|unique:Colegiado,Colegiado,' . $this->CodColegiado . ',codcolegiado'
         ];
 
         return $rules;
@@ -33,7 +33,8 @@ class ColegiadoRequest extends FormRequest
     public function messages()
     {
         return [
-            'colegiado.required'    => 'Informe a descrição do Colegiado/Comissão'
+            'colegiado.required'    => 'Informe a descrição do Colegiado/Comissão',
+            'colegiado.unique'      => 'Colegiado/Comissão já cadastrado'
         ];
     }
 }

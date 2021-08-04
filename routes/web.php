@@ -32,3 +32,7 @@ Route::patch('/colegiado/{CodColegiado}', [ColegiadoController::class, 'update']
 Route::delete('/colegiado/{CodColegiado}', [ColegiadoController::class, 'destroy']);
 
 Route::get('/membro', [MembroController::class, 'index']);
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');    
+});

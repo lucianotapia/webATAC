@@ -13,4 +13,10 @@ class Colegiado extends Model
     protected $primaryKey = 'CodColegiado';
 
     protected $table = 'Colegiado';
+
+    public function reuniao()
+    {
+        return $this->hasMany(Reuniao::class, 'idColegiado', 'CodColegiado');
+    }
+
 }

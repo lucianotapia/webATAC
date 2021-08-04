@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Colegiado;
+use App\Models\Reuniao;
 use App\Http\Requests\ColegiadoRequest;
+
 
 class ColegiadoController extends Controller
 {
@@ -16,8 +18,9 @@ class ColegiadoController extends Controller
      */
     public function index()
     {        
-        $colegiados = Colegiado::OrderBy('Colegiado')->get();        
-        return view('colegiado.index', ['colegiados' => $colegiados]);
+        // $colegiados = Colegiado::OrderBy('Colegiado')->with('reuniao')->get();
+        $colegiados = Colegiado::OrderBy('Colegiado')->get();
+        return view('colegiado.index', ['colegiados' => $colegiados]);        
     }
 
     /**
@@ -100,11 +103,25 @@ class ColegiadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $colegiado = Colegiado::find($id);
-        $colegiado->delete();
 
+        $id_colegiado = $request["id_colegiado"];
+        // $existe = Reuniao::Where('idColegiado', $id)->exists();
+        $existe = Reuniao::Where('idColegiado', $id_colegiado)->exists();
+
+        if ($existe) {
+            request()->session()->flash('alert-warning', 'Este registro não pode ser deletado.');
+        } else {
+            $colegiado = Colegiado::find($id_colegiado);
+            if ($colegiado->delete())
+                request()->session()->flash('alert-info', 'Registro deletado com sucesso.');
+            else
+                request()->session()->flash('alert-danger', 'Não foi possível excluir este registro.');
+        }
+
+        //return ($id_colegiado); 
         return redirect("/colegiado");
+        
     }
 }
