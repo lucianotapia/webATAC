@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">		
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
@@ -54,44 +53,22 @@
             </nav>
             
             <div  class="text-center" id="dados">
-                @if ($errors->any())
-                <div class="alert alert-danger mt-3">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif        
-
-                <div class="flash-message mt-3">
-                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}
-                            <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a>
-                        </p>
-                        @endif
-                    @endforeach
-                </div>
-
                 @yield('dados')
             </div>
             
 		    </div>
-        </div>    
-
+        </div>           
+        
         <script src="{{ asset('js/popper.js') }}"></script>
 
         <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>        
+        <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.js') }}"></script>
         <script src="{{ asset('js/datepicker-pt-BR.js') }}"></script>
 
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
-
-        
 
         @yield('javascripts_bottom')
   </body>

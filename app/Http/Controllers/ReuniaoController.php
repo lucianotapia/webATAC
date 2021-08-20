@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 
 use App\Models\Reuniao;
 use App\Models\Colegiado;
+use App\Http\Requests\ReuniaoRequest;
 
 class ReuniaoController extends Controller
 {    
@@ -17,7 +18,7 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index(Request $request) 
     {        
         //$sql = "select * from Reuniao order by Data";        
 
@@ -39,7 +40,9 @@ class ReuniaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('reuniao.create', [
+            'reuniao' => new Reuniao,
+        ]);
     }
 
     /**
@@ -48,9 +51,24 @@ class ReuniaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReuniaoRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $reuniao = new Reuniao;        
+
+        $datacompleta = $request->data . " " . $request->hora . ":" . $request->minuto . ":00";;
+        
+        //return $datacompleta;
+
+        $reuniao->idColegiado = $request->colegiado_id;
+        $reuniao->Titulo = $request->titulo;
+        $reuniao->Data = $datacompleta;
+        $reuniao->Observacao = $request->Observacao;
+        $reuniao->save($validated);        
+        request()->session()->flash('alert-info', 'Reunião cadastrada com sucesso.');
+        
+        return redirect("/reuniao");
     }
 
     /**
@@ -70,9 +88,11 @@ class ReuniaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {        
-        return view('reuniao.edit', [ 'reuniao' => Reuniao::findOrFail($id), 'colegiados' => Colegiado::OrderBy("Colegiado")->get()]);
+    public function edit($id)    
+    {
+        return view('reuniao.edit', [
+            'reuniao' => Reuniao::findOrFail($id)
+       ]);
     }
 
     /**
@@ -84,7 +104,17 @@ class ReuniaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validated();
+
+        $reuniao = reuniao::find($id);
+        $reuniao->descricao = $request->inicio;        
+        $reuniao->idColegiado = $request->colegiado_id;   
+        $reuniao->data = $request->data;
+
+        $reuniao->update($validated);
+        request()->session()->flash('alert-info', 'Dados do reunião atualizado com sucesso.');
+        
+        return redirect("/reuniao");
     }
 
     /**
@@ -93,9 +123,17 @@ class ReuniaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id_reuniao = $request["id_reuniao"];
+
+        $reuniao = Reuniao::find($id_reuniao);
+        if ($reuniao->delete())
+            request()->session()->flash('alert-info', 'Registro deletado com sucesso.');
+        else
+            request()->session()->flash('alert-danger', 'Não foi possível excluir este registro.');
+
+        return redirect("/reuniao");
     }
 
     public function horas()

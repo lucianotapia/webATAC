@@ -16,11 +16,17 @@ class ColegiadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {        
         // $colegiados = Colegiado::OrderBy('Colegiado')->with('reuniao')->get();
-        $colegiados = Colegiado::OrderBy('Colegiado')->get();
-        return view('colegiado.index', ['colegiados' => $colegiados]);        
+        $procura = '%' . request()->nome . '%'; 
+        if (isset(request()->nome)) {
+            $colegiados = Colegiado::where('colegiado', 'like', $procura )->OrderBy('Colegiado')->get();            
+        }
+        else
+            $colegiados = Colegiado::OrderBy('Colegiado')->get();
+
+        return view('colegiado.index', ['colegiados' => $colegiados]);
     }
 
     /**
@@ -34,7 +40,6 @@ class ColegiadoController extends Controller
             'colegiado' => new Colegiado,
         ]);        
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -105,7 +110,6 @@ class ColegiadoController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $id_colegiado = $request["id_colegiado"];
         // $existe = Reuniao::Where('idColegiado', $id)->exists();
         $existe = Reuniao::Where('idColegiado', $id_colegiado)->exists();
@@ -121,7 +125,6 @@ class ColegiadoController extends Controller
         }
 
         //return ($id_colegiado); 
-        return redirect("/colegiado");
-        
+        return redirect("/colegiado");        
     }
 }

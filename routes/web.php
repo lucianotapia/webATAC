@@ -6,6 +6,8 @@ use App\Http\Controllers\ReuniaoController;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\MembroController;
 
+use App\Http\Controllers\PessoaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +24,11 @@ Route::get('/', function () {
 });
 
 Route::get('/reuniao', [ReuniaoController::class, 'index']);
-Route::get('/reuniao/{Codigo}/edit', [ReuniaoController::class, 'edit']);
+Route::get('/reuniao/create', [ReuniaoController::class, 'create']);
+Route::get('/reuniao/{CodReuniao}/edit', [ReuniaoController::class, 'edit']);
+Route::post('/reuniao', [ReuniaoController::class, 'store']);
+Route::patch('/reuniao/{CodReuniao}', [ReuniaoController::class, 'update']);
+Route::delete('/reuniao/{CodReuniao}', [ReuniaoController::class, 'destroy']);
 
 Route::get('/colegiado', [ColegiadoController::class, 'index']);
 Route::get('/colegiado/create', [ColegiadoController::class, 'create']);
@@ -32,7 +38,15 @@ Route::patch('/colegiado/{CodColegiado}', [ColegiadoController::class, 'update']
 Route::delete('/colegiado/{CodColegiado}', [ColegiadoController::class, 'destroy']);
 
 Route::get('/membro', [MembroController::class, 'index']);
+Route::get('/membro/create', [MembroController::class, 'create']);
+Route::post('/membro', [MembroController::class, 'store']);
+Route::get('/membro/{CodMembro}/edit', [MembroController::class, 'edit']);
+Route::patch('/membro/{CodMembro}', [MembroController::class, 'update']);
+Route::delete('/membro/{CodMembro}', [MembroController::class, 'destroy']);
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');    
 });
+
+Route::get('/encontrar_pessoa',[PessoaController::class, 'encontrar_pessoa'])->name('encontrar_pessoa');
+

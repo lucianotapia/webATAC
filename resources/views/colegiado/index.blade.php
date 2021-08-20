@@ -1,35 +1,49 @@
 @extends('home')
 
 @section('dados')
-
-    @if (!$colegiados->isEmpty())        
-
-        <div class="container">            
-            <div>
-                <table class="table">
-                    <thead>
-                        <tr class="table-primary">
-                            <th class="col-sm-9 text-left" scope="col">Colegiado/Comissão</th>
-                            <th class="col-sm-3 text-center" scope="col">
-                                <a href="/colegiado/create">
-                                <button type="submit" class="btn btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
-                                </a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($colegiados as $colegiado)
-                            @include('colegiado.partials.fields')         
-                            <br/>                    
-                        @endforeach    
-                    </tbody>
-                </table>
+    <div class="container mt-5">
+        @include('include.mensagem')   
+        <div class="card">                
+            <div class="card-header text-left">
+                <h5>Cadastro de Colegiados/Comissão</h5>
+            </div>
+            <div class="card-body">
+                <form method="get" action="/colegiado">
+                    <div class="row">
+                        <div class="col-9 text-left">                    
+                            <label for="exampleFormControlInput1" class="form-label"><b>Colegiado/Comissão</b> </label>
+                            <input type="text" id="nome" name="nome" class="form-control" value="{{ request()->nome }}">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-outline-info form-control"><i class="fa fa-filter"></i> Filtro </button>
+                        </div>                       
+                    </div>
+                </form>
             </div>
         </div>
-    @else
-        <h3>Não há reuniões cadastradas!</h3>    
-    @endif
-    
+        <!-- Tabela de dados -->
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-primary">
+                    <th class="col-sm-9 text-left" scope="col">Colegiado/Comissão</th>
+                    <th class="col-sm-3 text-center" scope="col">
+                        <a href="/colegiado/create">
+                        <button type="submit" class="btn btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($colegiados as $colegiado)
+                    @include('colegiado.partials.fields')
+                @empty
+                    <tr><td colspan="2"><h3>Não há reuniões cadastradas!</h3></td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
     <!-- Modal para exclusão -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
