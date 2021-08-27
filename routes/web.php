@@ -30,6 +30,8 @@ Route::post('/reuniao', [ReuniaoController::class, 'store']);
 Route::patch('/reuniao/{CodReuniao}', [ReuniaoController::class, 'update']);
 Route::delete('/reuniao/{CodReuniao}', [ReuniaoController::class, 'destroy']);
 
+Route::get('/reuniao/{CodReuniao}', [ReuniaoController::class, 'deletaAnexo']);
+
 Route::get('/colegiado', [ColegiadoController::class, 'index']);
 Route::get('/colegiado/create', [ColegiadoController::class, 'create']);
 Route::post('/colegiado', [ColegiadoController::class, 'store']);
@@ -43,6 +45,8 @@ Route::post('/membro', [MembroController::class, 'store']);
 Route::get('/membro/{CodMembro}/edit', [MembroController::class, 'edit']);
 Route::patch('/membro/{CodMembro}', [MembroController::class, 'update']);
 Route::delete('/membro/{CodMembro}', [MembroController::class, 'destroy']);
+
+Route::get('/convocar-membro/{CodReuniao}', [ReuniaoController::class, 'convocar']);
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');    

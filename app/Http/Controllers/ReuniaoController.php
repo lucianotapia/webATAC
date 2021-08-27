@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Http\UploadedFile;
 
 use App\Models\Reuniao;
 use App\Models\Colegiado;
@@ -55,20 +56,31 @@ class ReuniaoController extends Controller
     {
         $validated = $request->validated();
 
-        $reuniao = new Reuniao;        
+        $reuniao = new Reuniao;
 
-        $datacompleta = $request->data . " " . $request->hora . ":" . $request->minuto . ":00";;
+        $minuto = $request->minuto;
+        if (strlen($request->minuto)==1)
+            $minuto = "0" . $request->minuto;
         
-        //return $datacompleta;
+        $datacompleta = $request->data . " " . $request->hora . ":" . $minuto . ":00";
 
         $reuniao->idColegiado = $request->colegiado_id;
         $reuniao->Titulo = $request->titulo;
         $reuniao->Data = $datacompleta;
-        $reuniao->Observacao = $request->Observacao;
-        $reuniao->save($validated);        
+        $reuniao->Observacao = $request->observacao;
+        $reuniao->save($validated);
+
+        //$request->file('pauta'); or $request->pauta;
+        //$request->file('pauta')->isValid();
+        //$request->pauta->getClientOriginalName();
+
+        //return dd($request->hasFile('pauta'));
+        
+        $upload = $reuniao->UploadReuniao($request->Codigo, $request);
+
         request()->session()->flash('alert-info', 'Reunião cadastrada com sucesso.');
         
-        return redirect("/reuniao");
+        return back()->withInput();; // redirect("/reuniao");
     }
 
     /**
@@ -102,17 +114,25 @@ class ReuniaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReuniaoRequest $request, $id)
     {
         $validated = $request->validated();
 
         $reuniao = reuniao::find($id);
-        $reuniao->descricao = $request->inicio;        
-        $reuniao->idColegiado = $request->colegiado_id;   
-        $reuniao->data = $request->data;
 
+        $minuto = $request->minuto;
+        if (strlen($request->minuto)==1)
+            $minuto = "0" . $request->minuto;
+
+        $datacompleta = $request->data . " " . $request->hora . ":" . $minuto . ":00";
+        $reuniao->idColegiado = $request->colegiado_id;
+        $reuniao->Titulo = $request->titulo;
+        $reuniao->Data = $datacompleta;
+        $reuniao->Observacao = $request->observacao;
         $reuniao->update($validated);
         request()->session()->flash('alert-info', 'Dados do reunião atualizado com sucesso.');
+
+        $upload = $reuniao->UploadReuniao($reuniao->Codigo, $request);
         
         return redirect("/reuniao");
     }
@@ -136,12 +156,17 @@ class ReuniaoController extends Controller
         return redirect("/reuniao");
     }
 
-    public function horas()
-    {
-        $horas = array();
-        for($cont=7; $cont<18; $cont++) {
-            $horas[$cont] = $horas;
-        }
-        return $horas;
+    public function convocar($id) {
+
+        $reuniao = Reuniao::findOrFail($id);
+        $colegiado = Colegiado::findOrFail($reuniao->IdColegiado);
+
+        return view('reuniao.convocar', [ 'reuniao' => $reuniao, 'colegiado' => $colegiado ]);
     }
+
+    public function deletaAnexo($id) {
+
+        return "ok";
+    }
+    
 }

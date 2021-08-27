@@ -73,7 +73,7 @@
                         <th scope="col"></th>
                         <th class="col-sm-3 text-center" scope="col">
                             <a href="/membro/create">
-                            <button type="submit" class="btn btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
+                            <button type="submit" class="btn btn-sm btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
                             </a>
                         </th>
                     </tr>

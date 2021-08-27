@@ -29,7 +29,7 @@
                     <th class="col-sm-9 text-left" scope="col">Colegiado/Comissão</th>
                     <th class="col-sm-3 text-center" scope="col">
                         <a href="/colegiado/create">
-                        <button type="submit" class="btn btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
+                        <button type="submit" class="btn btn-sm btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
                         </a>
                     </th>
                 </tr>

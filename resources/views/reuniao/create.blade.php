@@ -2,7 +2,7 @@
 
 @section('dados')
     <div class="container mt-5">
-        <form method="post" action="/reuniao">
+        <form method="post" action="/reuniao" enctype="multipart/form-data">
             @csrf
             <div class="card">
                 <div class="card-header text-left">

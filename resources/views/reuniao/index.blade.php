@@ -9,7 +9,7 @@
                 <h5>Cadastro de reuniões</h5>
             </div>
             <div class="card-body">
-                <form method="get" action="/reuniao">
+                <form method="get" action="/reuniao" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-10 text-left">                                                      
                             <label for="exampleFormControlInput1" class="form-label"><b>Colegiado</b></label>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-2 text-center">                            
                             <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-                            <button type="submit" class="btn btn-outline-info form-control"><i class="fa fa-filter"></i> Filtro </button>                            
+                            <button type="submit" class="btn btn-outline-info form-control"><i class="fa fa-filter"></i> Filtro </button>
                         </div>                
                         <div class="row">&nbsp</div>
                     </div>
@@ -42,17 +42,13 @@
         <!-- Tabela de dados -->
         <table class="table table-bordered">
             <thead>
-                <tr class="table-primary">
-                    <th scope="col">Título</th>
+                <tr class="table-secondary">
+                    <th class="text-left" scope="col">Título</th>
                     <th scope="col">Data</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Pauta</th>
-                    <th scope="col">Ata</th>
-                    <th scope="col">Anexo</th>
-                    <th scope="col">Complemento</th>
-                    <th class="col-sm-3 text-center" scope="col">
+                    <th scope="col">Hora</th>                    
+                    <th class="col-sm-4 text-center" scope="col">
                         <a href="/reuniao/create">
-                        <button type="submit" class="btn btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
+                        <button type="submit" class="btn btn-sm btn-outline-primary")><i class="fa fa-plus"></i> Novo</button>
                         </a>
                     </th>
                 </tr>
@@ -90,8 +86,8 @@
                     </div>                
                     <div class="modal-footer">
                         <input type="hidden" name="id_reuniao" id="id_reuniao" value="">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não, cancelar</button>
-                        <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Não, cancelar</button>
+                        <button type="submit" class="btn btn-outline-danger">Sim, excluir</button>
                     </div>
                 </form>
             </div>
@@ -107,6 +103,7 @@
                 modal.find(".modal-body").text("Confirma a exclusão do registro '" + button.data("nome") + "'?");
                 modal.find(".modal-footer #id_reuniao").val(recipientId);
             })
+
         </script>
     @endsection
     
