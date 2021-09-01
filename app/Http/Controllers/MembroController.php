@@ -22,7 +22,8 @@ class MembroController extends Controller
         
         $where = "";
         if (request()->situacao_id==1) {
-            $where = "(getdate() between inicio and fim)";        
+            //$where = "(getdate() between inicio and fim)";        
+            $where = "(convert(varchar(10),getdate(),103) between convert(varchar(10),inicio,103) and convert(varchar(10),fim,103))";
         }
 
         if (isset(request()->colegiado_id)) {
@@ -43,8 +44,7 @@ class MembroController extends Controller
 
         $membros = MembroController::paginate($membros, 15);
 
-        $colegiados = Colegiado::OrderBy("Colegiado")->get();
-        
+        $colegiados = Colegiado::OrderBy("Colegiado")->get();        
         
         return view('membro.index', ['membros' => $membros, 'colegiados' => $colegiados]);
     }
@@ -95,7 +95,7 @@ class MembroController extends Controller
         else
             request()->session()->flash('alert-danger', 'Não foi possível excluir este registro.');
 
-        return redirect("/membro");
+        return back();
     }
 
     public function update(MembroRequest $request, $id)
@@ -111,7 +111,7 @@ class MembroController extends Controller
         $membro->update($validated);
         request()->session()->flash('alert-info', 'Dados do membro atualizado com sucesso.');
         
-        return redirect("/membro");
+        return redirect($request->url_anterior);
     }
 
     public function store(MembroRequest $request)
@@ -127,6 +127,6 @@ class MembroController extends Controller
         $membro->save($validated);        
         request()->session()->flash('alert-info', 'Membro cadastrado com sucesso.');
         
-        return redirect("/membro");
+        return redirect("/membro/create");
     }
 }

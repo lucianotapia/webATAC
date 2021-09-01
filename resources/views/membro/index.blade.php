@@ -1,11 +1,11 @@
 @extends('home')
 
 @section('dados')    
-        <div class="container mt-5">
-            @include('include.mensagem')
+        <div class="container mt-5">            
             <div class="card">                
                 <div class="card-header text-left">
                     <h5>Cadastro de membros</h5>
+                    @include('include.mensagem')
                 </div>
                 <div class="card-body">
                     <form method="get" action="/membro">
@@ -65,7 +65,7 @@
             <!-- Tabela de dados -->
             <table class="table table-bordered">
                 <thead>
-                    <tr class="table-primary">                    
+                    <tr class="table-secondary">                    
                         <th scope="col">NUSP</th>
                         <th class="text-left" scope="col">Membro</th>
                         <th scope="col">Início</th>

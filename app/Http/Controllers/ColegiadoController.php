@@ -55,7 +55,7 @@ class ColegiadoController extends Controller
         $colegiado->save($validated);        
         request()->session()->flash('alert-info', 'Colegiado cadastrado com sucesso.');
         
-        return redirect("/colegiado");
+        return redirect("/colegiado/create");
     }
 
     /**
@@ -99,7 +99,7 @@ class ColegiadoController extends Controller
 
         request()->session()->flash('alert-info', 'Colegiado/Comissão atualizado com sucesso.');
         
-        return redirect("/colegiado");
+        return redirect($request->url_anterior);
     }
 
     /**
@@ -125,6 +125,6 @@ class ColegiadoController extends Controller
         }
 
         //return ($id_colegiado); 
-        return redirect("/colegiado");        
+        return back();
     }
 }

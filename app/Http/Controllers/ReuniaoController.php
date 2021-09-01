@@ -80,7 +80,7 @@ class ReuniaoController extends Controller
 
         request()->session()->flash('alert-info', 'Reunião cadastrada com sucesso.');
         
-        return back()->withInput();; // redirect("/reuniao");
+        return redirect("/reuniao/create");
     }
 
     /**
@@ -134,7 +134,7 @@ class ReuniaoController extends Controller
 
         $upload = $reuniao->UploadReuniao($reuniao->Codigo, $request);
         
-        return redirect("/reuniao");
+        return redirect($request->url_anterior);
     }
 
     /**
@@ -153,7 +153,7 @@ class ReuniaoController extends Controller
         else
             request()->session()->flash('alert-danger', 'Não foi possível excluir este registro.');
 
-        return redirect("/reuniao");
+        return back();
     }
 
     public function convocar($id) {

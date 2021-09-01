@@ -1,16 +1,16 @@
 @extends('home')
 
 @section('dados')
-    <div class="container mt-5">
-        @include('include.mensagem')   
-        <div class="card">                
+    <div class="container mt-5">        
+        <div class="card">
             <div class="card-header text-left">
                 <h5>Cadastro de Colegiados/Comissão</h5>
+                @include('include.mensagem')
             </div>
             <div class="card-body">
                 <form method="get" action="/colegiado">
                     <div class="row">
-                        <div class="col-9 text-left">                    
+                        <div class="col-9 text-left">
                             <label for="exampleFormControlInput1" class="form-label"><b>Colegiado/Comissão</b> </label>
                             <input type="text" id="nome" name="nome" class="form-control" value="{{ request()->nome }}">
                         </div>
@@ -25,7 +25,7 @@
         <!-- Tabela de dados -->
         <table class="table table-bordered">
             <thead>
-                <tr class="table-primary">
+                <tr class="table-secondary">
                     <th class="col-sm-9 text-left" scope="col">Colegiado/Comissão</th>
                     <th class="col-sm-3 text-center" scope="col">
                         <a href="/colegiado/create">

@@ -2,11 +2,11 @@
 
 @section('dados')
     
-    <div class="container mt-5">
-        @include('include.mensagem')
-        <div class="card">                
+    <div class="container mt-5">        
+        <div class="card">
             <div class="card-header text-left">
                 <h5>Cadastro de reuniões</h5>
+                @include('include.mensagem')
             </div>
             <div class="card-body">
                 <form method="get" action="/reuniao" enctype="multipart/form-data">

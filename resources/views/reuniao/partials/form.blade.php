@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col text-left">
+        <input type="hidden" name="url_anterior" class="form-control" value="{{ url()->previous() }} ">
         <label for="exampleFormControlInput1" class="form-label">Título</label>
         <input type="text" name="titulo" class="form-control" value="{{ old('titulo', $reuniao->Titulo)  }}">
     </div>

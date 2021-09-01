@@ -1,6 +1,7 @@
 
         <div class="row">
             <div class="col-10 text-left">
+                <input type="hidden" name="url_anterior" class="form-control" value="{{ url()->previous() }} ">
                 <label for="exampleFormControlInput1" class="form-label"><b>Procurar membro</b></label>
                 <input type="text" name="search_titular"id="search_titular" class="form-control" value="" placeholder="Informe no mínimo 4 letras">
             </div>
