@@ -69,110 +69,123 @@
 </div>
 
 <div class="row">
-    <div class="col-9 text-left">
+    
+    <div class="col-8 text-left">
         <label for="exampleFormControlInput1" class="form-label"><b>Pauta</b></label>
-        <input type="file" name="pauta" id="pauta">
-    </div>
+        <input type="file" name="pauta" class="form-control">
+    </div>    
 
-    <div class="col-3 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/arqs/2883cd36f89eed9a2ca70bce76ee1754.pdf" }}" target="_blank">
-            <button class="btn btn-sm btn-outline-warning"><i class="fa fa-cloud-download"></i> Pauta</button>
-        </a>
 
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=pauta">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
-    </div>
+        @if ($reuniao->FilePauta!='') 
+            <a href="/download/{{ $reuniao->FilePauta }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FilePauta }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
+    </div>    
 </div>
 
 <div class="row">
-    <div class="col-9 text-right">
+    <div class="col-8 text-left">
         <label for="exampleFormControlInput1" class="form-label"><b>Ata</b></label>
-
-        @if (file_exists("arqs/0327_Anexos.pdf"))
-            <a href="/arqs/0326_Anexos.pdf" target="_blank"><i class="fa fa-cloud-download" aria-hidden="true"></i> Anexos</a>
-        @else
-            <input type="file" name="ata" class="form-control">
-        @endif        
-
+        <input type="file" name="ata" class="form-control">
     </div>
 
-    <div class="col-3 text-right align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=ata">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAta!='') 
+            <a href="/download/{{ $reuniao->FileAta }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAta }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col-10 text-left">
+    <div class="col-8 text-left">
         <label for="exampleFormControlInput1" class="form-label"><b>Anexo</b></label>
         <input type="file" name="anexo0" class="form-control">
     </div>    
 
-    <div class="col-2 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=anexo0">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAnexo0!='') 
+            <a href="/download/{{ $reuniao->FileAnexo0 }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAnexo0 }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col-10 text-left">
+    <div class="col-8 text-left">
     <label for="exampleFormControlInput1" class="form-label"><b>Complementar 1</b></label>
         <input type="file" name="anexo1" class="form-control">
     </div>
 
-    <div class="col-2 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=anexo1">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAnexo1!='') 
+            <a href="/download/{{ $reuniao->FileAnexo1 }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAnexo1 }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col text-left">
+    <div class="col-8 text-left">
     <label for="exampleFormControlInput1" class="form-label"><b>Complementar 2</b></label>    
         <input type="file" name="anexo2" class="form-control">
     </div>
 
-    <div class="col-2 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=anexo2">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAnexo2!='') 
+            <a href="/download/{{ $reuniao->FileAnexo2}}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAnexo2 }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col text-left">
+    <div class="col-8 text-left">
     <label for="exampleFormControlInput1" class="form-label"><b>Complementar 3</b></label>
         <input type="file" name="anexo3" class="form-control">
     </div>
 
-    <div class="col-2 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=anexo3">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAnexo3!='') 
+            <a href="/download/{{ $reuniao->FileAnexo3 }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAnexo3 }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
 <div class="row">
-    <div class="col text-left">
-    <label for="exampleFormControlInput1" class="form-label"><b>Complementar 4</b></label>    s
-        <input type="file" name="anexo3" class="form-control">
+    <div class="col-8 text-left">        
+        <label for="exampleFormControlInput1" class="form-label"><b>Complementar 4</b></label>
+        <input type="file" name="anexo4" class="form-control">
     </div>
 
-    <div class="col-2 text-center align-self-end">
+    <div class="col-4 text-right align-self-end">
         <label for="exampleFormControlInput1" class="form-label">&nbsp;</label>
-        <a href="/reuniao/anexo/{{ $reuniao->Codigo }}?tipo=anexo4">
-            <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Excluir</button>
-        </a>
+        @if ($reuniao->FileAnexo4!='')
+            <a href="/download/{{ $reuniao->FileAnexo4 }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                <i class="fa fa-cloud-download"></i> Download
+            </a>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal" data-id_arquivo="{{ $reuniao->FileAnexo4 }}"><i class="fa fa-trash"></i> Excluir</button>
+        @endif
     </div>
 </div>
 
@@ -191,4 +204,14 @@
 
 @section('javascripts_bottom')
     <script type="text/javascript" src="{{ asset('js/reuniao.js') }}"></script>
+
+    <script type="text/javascript">
+        $("#deleteModal").on("show.bs.modal", function (event) {
+            var button = $(event.relatedTarget); 
+            var recipientId = button.data("id_arquivo");
+            var modal = $(this);                
+            modal.find(".modal-body").text("Confirma a exclusão do arquivo '" + button.data("id_arquivo") + "'?");
+            modal.find(".modal-footer #id_arquivo").val(recipientId);
+        })
+    </script>
 @endsection

@@ -12,10 +12,10 @@
                 <form method="get" action="/reuniao" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-10 text-left">                                                      
-                            <label for="exampleFormControlInput1" class="form-label"><b>Colegiado</b></label>
+                            <label for="exampleFormControlInput1" class="form-label"><b>Comissões/Colegiado</b></label>
                             <select name="colegiado_id" class="form-select">
                                 @if (request()->colegiado_id=="")
-                                    <option value="" selected>Todas as reuniões</option>
+                                    <option value="" selected>Todas as Comissões/Colegiados</option>
                                 @else
                                     <option value="">Todas as reuniões</option>
                                 @endif
@@ -108,7 +108,3 @@
     @endsection
     
 @endsection
-
-
-
-

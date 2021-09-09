@@ -30,7 +30,9 @@ Route::post('/reuniao', [ReuniaoController::class, 'store']);
 Route::patch('/reuniao/{CodReuniao}', [ReuniaoController::class, 'update']);
 Route::delete('/reuniao/{CodReuniao}', [ReuniaoController::class, 'destroy']);
 
-Route::get('/reuniao/{CodReuniao}', [ReuniaoController::class, 'deletaAnexo']);
+Route::get('/download/{file}', [ReuniaoController::class, 'download']);
+//Route::get('/reuniao/deletefile/{file}', [ReuniaoController::class, 'deletaArquivo']);
+Route::post('/reuniao/deletefile', [ReuniaoController::class, 'deletaArquivo']);
 
 Route::get('/colegiado', [ColegiadoController::class, 'index']);
 Route::get('/colegiado/create', [ColegiadoController::class, 'create']);
@@ -48,9 +50,8 @@ Route::delete('/membro/{CodMembro}', [MembroController::class, 'destroy']);
 
 Route::get('/convocar-membro/{CodReuniao}', [ReuniaoController::class, 'convocar']);
 
+Route::get('/encontrar_pessoa',[PessoaController::class, 'encontrar_pessoa'])->name('encontrar_pessoa');
+
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');    
 });
-
-Route::get('/encontrar_pessoa',[PessoaController::class, 'encontrar_pessoa'])->name('encontrar_pessoa');
-

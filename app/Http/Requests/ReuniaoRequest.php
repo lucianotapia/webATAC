@@ -26,7 +26,8 @@ class ReuniaoRequest extends FormRequest
         $rules = [            
             'titulo' => 'required',
             'data'   => 'required|date_format:d/m/Y',
-            'colegiado_id' => 'required'
+            'colegiado_id' => 'required',
+            "pauta"  => 'mimes:pdf'
         ];
 
         return $rules;
@@ -39,6 +40,7 @@ class ReuniaoRequest extends FormRequest
             'data.required'   => 'A data não pode ficar em branco.',
             'data.numeric'    => 'O valor deve ser numérico.',
             'colegiado_id.required' => 'Colegiado não informado.',
+            'pauta.mimes'  => 'O arquivo de pauta deve ser no formato PDF'
         ];
     }
 }

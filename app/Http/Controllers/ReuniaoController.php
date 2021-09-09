@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Http\UploadedFile;
 
 use App\Models\Reuniao;
 use App\Models\Colegiado;
 use App\Http\Requests\ReuniaoRequest;
+
 
 class ReuniaoController extends Controller
 {    
@@ -41,8 +43,11 @@ class ReuniaoController extends Controller
      */
     public function create()
     {
+
+        $files = array("pauta" => "0", "ata" => "0", "anexo0" => "0", "anexo1" => "0", "anexo2" => "0", "anexo3" => "0", "anexo4" => "0");
+
         return view('reuniao.create', [
-            'reuniao' => new Reuniao,
+            'reuniao' => new Reuniao, 'files' => $files
         ]);
     }
 
@@ -68,15 +73,17 @@ class ReuniaoController extends Controller
         $reuniao->Titulo = $request->titulo;
         $reuniao->Data = $datacompleta;
         $reuniao->Observacao = $request->observacao;
-        $reuniao->save($validated);
+        $reuniao->save($validated);       
+
+        if ($request->hasFile('pauta')) {
+            $pautaarq = md5($reuniao->Codigo . 'pauta') . "." . $request->file('pauta')->extension();
+            $retorno = $request->file('pauta')->storeAs('/pdfs', $pautaarq);            
+        }
+        
 
         //$request->file('pauta'); or $request->pauta;
         //$request->file('pauta')->isValid();
-        //$request->pauta->getClientOriginalName();
-
-        //return dd($request->hasFile('pauta'));
-        
-        $upload = $reuniao->UploadReuniao($request->Codigo, $request);
+        //$request->pauta->getClientOriginalName();        
 
         request()->session()->flash('alert-info', 'Reunião cadastrada com sucesso.');
         
@@ -101,10 +108,15 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)    
-    {
-        return view('reuniao.edit', [
-            'reuniao' => Reuniao::findOrFail($id)
-       ]);
+    {   
+        $files = array("pauta" => "0", "ata" => "0", "anexo0" => "0", "anexo1" => "0", "anexo2" => "0", "anexo3" => "0", "anexo4" => "0");
+
+        // Verifica se o arquivo de Pauta existe
+        $nomearq = md5($id . "pauta") . ".pdf";
+        if (Storage::exists("pdfs/" . $nomearq))
+            $files['pauta'] = '1';
+
+        return view('reuniao.edit', [ 'reuniao' => Reuniao::findOrFail($id), 'files' => $files ]);
     }
 
     /**
@@ -129,10 +141,46 @@ class ReuniaoController extends Controller
         $reuniao->Titulo = $request->titulo;
         $reuniao->Data = $datacompleta;
         $reuniao->Observacao = $request->observacao;
+
+        if ($request->hasFile('pauta')) {
+            $pautaarq = md5($reuniao->Codigo . 'pauta') . "." . $request->file('pauta')->extension();
+            $retorno = $request->file('pauta')->storeAs('/pdfs', $pautaarq);            
+        }
+
+        if ($request->hasFile('ata')) {
+            $arquivo = md5($reuniao->Codigo . 'ata') . "." . $request->file('ata')->extension();
+            $retorno = $request->file('ata')->storeAs('/pdfs', $arquivo);            
+        }
+
+        if ($request->hasFile('anexo0')) {
+            $arquivo = md5($reuniao->Codigo . 'anexo0') . "." . $request->file('anexo0')->extension();
+            $retorno = $request->file('anexo0')->storeAs('/pdfs', $arquivo);            
+        }
+
+        if ($request->hasFile('anexo1')) {
+            $arquivo = md5($reuniao->Codigo . 'anexo1') . "." . $request->file('anexo1')->extension();
+            $retorno = $request->file('anexo1')->storeAs('/pdfs', $arquivo);            
+        }
+
+        if ($request->hasFile('anexo2')) {
+            $arquivo = md5($reuniao->Codigo . 'anexo2') . "." . $request->file('anexo2')->extension();
+            $retorno = $request->file('anexo2')->storeAs('/pdfs', $arquivo);            
+        }
+
+        if ($request->hasFile('anexo3')) {
+            $arquivo = md5($reuniao->Codigo . 'anexo3') . "." . $request->file('anexo3')->extension();
+            $retorno = $request->file('anexo3')->storeAs('/pdfs', $arquivo);            
+        }
+
+        if ($request->hasFile('anexo4')) {
+            $arquivo = md5($reuniao->Codigo . 'anexo4') . "." . $request->file('anexo4')->extension();
+            $retorno = $request->file('anexo4')->storeAs('/pdfs', $arquivo);            
+        }
+
         $reuniao->update($validated);
         request()->session()->flash('alert-info', 'Dados do reunião atualizado com sucesso.');
 
-        $upload = $reuniao->UploadReuniao($reuniao->Codigo, $request);
+        // $upload = $reuniao->UploadReuniao($reuniao->Codigo, $request);
         
         return redirect($request->url_anterior);
     }
@@ -164,9 +212,21 @@ class ReuniaoController extends Controller
         return view('reuniao.convocar', [ 'reuniao' => $reuniao, 'colegiado' => $colegiado ]);
     }
 
-    public function deletaAnexo($id) {
-
-        return "ok";
+    public function download($file) {        
+        return Storage::Download('pdfs/' . $file);
     }
-    
+
+    public function deletaArquivo(Request $request) {
+
+        $file = $request['id_arquivo'];
+
+        $file = "pdfs/" . $file;
+        
+        if (Storage::delete([$file])==1)
+            request()->session()->flash('alert-info', 'Arquivo deletado com sucesso.');
+        else
+            request()->session()->flash('alert-info', 'O arquivo NÃO pode ser deletado.');
+            
+        return back();
+    }    
 }
